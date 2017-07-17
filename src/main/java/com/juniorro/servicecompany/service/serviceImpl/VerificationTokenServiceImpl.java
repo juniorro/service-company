@@ -1,4 +1,4 @@
-package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
+/*package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,3 +46,4 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
 
 }
+*/

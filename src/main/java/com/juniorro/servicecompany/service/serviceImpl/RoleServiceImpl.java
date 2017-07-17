@@ -1,4 +1,4 @@
-package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
+/*package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,3 +24,4 @@ public class RoleServiceImpl implements RoleService {
 		return roleRepo.save(role);
 	}
 }
+*/

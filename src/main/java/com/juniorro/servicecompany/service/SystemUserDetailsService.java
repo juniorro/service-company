@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.service;
+/*package com.juniorro.servicecompany.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -27,8 +27,9 @@ public class SystemUserDetailsService implements UserDetailsService {
 	}
 	
 
-	/*private Collection<? extends GrantedAuthority> getAuthoriries(String role) {
+	private Collection<? extends GrantedAuthority> getAuthoriries(String role) {
 		return Arrays.asList(new SimpleGrantedAuthority(role));
-	}*/
+	}
 
 }
+*/

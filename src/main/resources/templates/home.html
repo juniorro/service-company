@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="menu">
 <head>
 <title>Service Company</title>
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link
   href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-  rel="stylesheet">
+  rel="stylesheet"/>
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
   <link rel="stylesheet" type="text/css"
@@ -46,7 +48,6 @@
                 </div>
                 <div class="table-container">
                   <table id="mytable" class="table table-striped table-bordered table-list">
-
                    <thead>
                   <tr data-status="cancelled pending complete">
                       <th>Service</th>
@@ -61,7 +62,7 @@
                     <td>Donna R. Folse</td>
                     <td>2012/05/06</td>
                     <td>Editor</td>
-                    <td><span class="label label-success">Completed</span>
+                    <td><span class="label label-success">Completed</span></td>
                     <td>
                         <a class="btn btn-default"><span class="glyphicon glyphicon-pencil"
                         aria-hidden="true"></span></a>
@@ -197,7 +198,7 @@
             </div>
             <div class="content-footer">
               <p>
-                Page © - 2016 <br> Powered By <a
+                Page © - 2016 <br /> Powered By <a
                   href="https://www.facebook.com/tavo.qiqe.lucero"
                   target="_blank">TavoQiqe</a>
               </p>
@@ -235,7 +236,7 @@
                         <span class="input-group-addon">@</span> <input
                           id="prependedtext" name="prependedtext"
                           class="form-control" placeholder="Nombre de usuario"
-                          type="text" required="">
+                          type="text" required=""/>
                       </div>
                     </div>
                   </div>
@@ -247,7 +248,7 @@
                         <span class="input-group-addon"> <i
                           class="fa fa-user"></i>
                         </span> <input id="nombre" name="nombre" class="form-control"
-                          placeholder="Nombre Completo" type="text" required="">
+                          placeholder="Nombre Completo" type="text"/>
                       </div>
                     </div>
                   </div>
@@ -257,7 +258,7 @@
                     <div class="col-md-5">
                       <div class="input-group">
                         <input id="email" name="email" class="form-control"
-                          placeholder="Correo Electrónico" type="email" required="">
+                          placeholder="Correo Electrónico" type="email" />
                         <span class="input-group-addon"> <i
                           class="fa fa-envelope"></i>
                         </span>
@@ -268,7 +269,7 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label" for="departamento">Departamento</label>
                     <div class="col-md-5">
-                      <select id="framework" name="framework[]" multiple
+                      <select id="framework" name="framework[]" multiple="multiple"
                         class="form-control">
                         <option value="Codeigniter">Codeigniter</option>
                         <option value="CakePHP">CakePHP</option>

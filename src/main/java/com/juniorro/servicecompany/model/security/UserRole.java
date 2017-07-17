@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model.security;
+/*package com.juniorro.servicecompany.model.security;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -61,3 +61,4 @@ public class UserRole {
 	}
 
 }
+*/

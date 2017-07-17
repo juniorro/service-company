@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model.security;
+/*package com.juniorro.servicecompany.model.security;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -14,3 +14,4 @@ public class Authority implements GrantedAuthority{
 		return authority;
 	}
 }
+*/

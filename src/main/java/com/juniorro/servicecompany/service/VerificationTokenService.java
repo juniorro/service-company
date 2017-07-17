@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.service;
+/*package com.juniorro.servicecompany.service;
 
 import org.springframework.stereotype.Service;
 
@@ -19,3 +19,4 @@ public interface VerificationTokenService {
 	void delete(final long id);
 	
 }
+*/

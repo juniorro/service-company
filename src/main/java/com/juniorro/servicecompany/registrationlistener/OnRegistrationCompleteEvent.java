@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.registrationlistener;
+/*package com.juniorro.servicecompany.registrationlistener;
 
 import org.springframework.context.ApplicationEvent;
 import com.juniorro.servicecompany.model.SystemUser;
@@ -23,3 +23,4 @@ public class OnRegistrationCompleteEvent extends ApplicationEvent {
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
+/*package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -64,3 +64,4 @@ public class PasswordResetTokenImpl implements PasswordResetTokenService {
 	}
 
 }
+*/

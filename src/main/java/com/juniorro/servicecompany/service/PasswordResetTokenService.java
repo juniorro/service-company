@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.service;
+/*package com.juniorro.servicecompany.service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -18,3 +18,4 @@ public interface PasswordResetTokenService {
 
 	void delete(long id);
 }
+*/

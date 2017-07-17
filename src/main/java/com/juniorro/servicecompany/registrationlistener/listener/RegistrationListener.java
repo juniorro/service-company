@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.registrationlistener.listener;
+/*package com.juniorro.servicecompany.registrationlistener.listener;
 
 import java.util.UUID;
 
@@ -52,3 +52,4 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 	}
 
 }
+*/

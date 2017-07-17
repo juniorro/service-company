@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model.security;
+/*package com.juniorro.servicecompany.model.security;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -143,3 +143,4 @@ public class PasswordResetToken {
     }
 
 }
+*/

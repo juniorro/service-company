@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model;
+/*package com.juniorro.servicecompany.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -232,3 +232,4 @@ public class SystemUser implements UserDetails, Serializable {
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model;
+/*package com.juniorro.servicecompany.model;
 
 import java.util.Date;
 
@@ -116,3 +116,4 @@ public class Services {
 	}
 
 }
+*/

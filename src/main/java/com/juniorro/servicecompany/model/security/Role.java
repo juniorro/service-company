@@ -1,4 +1,4 @@
-package com.juniorro.servicecompany.model.security;
+/*package com.juniorro.servicecompany.model.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -54,3 +54,4 @@ public class Role {
 	}
 
 }
+*/
