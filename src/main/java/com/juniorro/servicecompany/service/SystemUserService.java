@@ -1,4 +1,4 @@
-/*package com.juniorro.servicecompany.service;
+package com.juniorro.servicecompany.service;
 
 import java.util.List;
 import java.util.Set;
@@ -6,7 +6,6 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.juniorro.servicecompany.model.SystemUser;
-import com.juniorro.servicecompany.model.security.UserRole;
 
 @Service
 public interface SystemUserService {
@@ -25,7 +24,7 @@ public interface SystemUserService {
 
 	boolean checkEmailExist(final String email);
 
-	SystemUser savesystemUser(final SystemUser systemUser, Set<UserRole> userRoles);
+	/*SystemUser savesystemUser(final SystemUser systemUser, Set<UserRole> userRoles);*/
 
 	void saveConfirmSystemUser(SystemUser systemUser);
 
@@ -36,4 +35,3 @@ public interface SystemUserService {
 	long count();
 
 }
-*/

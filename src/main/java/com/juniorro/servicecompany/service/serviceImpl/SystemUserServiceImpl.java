@@ -1,107 +1,80 @@
-/*package com.juniorro.servicecompany.service.serviceImpl;
+package com.juniorro.servicecompany.service.serviceImpl;
 
 import java.util.List;
 import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.juniorro.patientappointmentsystem.Service.CustomerService;
-import com.juniorro.patientappointmentsystem.Service.RoleService;
-import com.juniorro.patientappointmentsystem.model.Customer;
-import com.juniorro.patientappointmentsystem.model.security.UserRole;
-import com.juniorro.patientappointmentsystem.repo.CustomerRepo;
+
+import com.juniorro.servicecompany.model.SystemUser;
+import com.juniorro.servicecompany.repo.SystemUserRepo;
+import com.juniorro.servicecompany.service.SystemUserService;
 
 @Service
 @Transactional
-public class SystemUserServiceImpl implements CustomerService {
+public class SystemUserServiceImpl implements SystemUserService {
 
 	@Autowired
-	CustomerRepo customerRepo;
-	
-	@Autowired
-	private RoleService roleService;
-	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	SystemUserRepo SystemUserRepo;
 
 	@Override
-	public Customer findByUsername(String username) {
-		return customerRepo.findByUsername(username);
+	public List<SystemUser> allsystemUser() {
+		return SystemUserRepo.findAll();
 	}
 
 	@Override
-	public Customer findByEmail(String email) {
-		return customerRepo.findByEmail(email);
+	public SystemUser findByUsername(String username) {
+		return SystemUserRepo.findByUsername(username);
 	}
 
 	@Override
-	public Customer findById(Long id) {
-		return customerRepo.findOne(id);
+	public SystemUser findByEmail(String email) {
+		return SystemUserRepo.findByEmail(email);
 	}
 
 	@Override
-	public Customer saveCustomer(final Customer customer, Set<UserRole> userRoles) {
-		 for (UserRole roles : userRoles) {
-             roleService.save(roles.getRole());
-         }
-		 String encryptpassword = bCryptPasswordEncoder.encode(customer.getPassword());
-		 customer.setPassword(encryptpassword);
-		 customer.getCustomerRoles().addAll(userRoles);
-		 customerRepo.save(customer);
-		return customer;
+	public SystemUser findById(Long id) {
+		return SystemUserRepo.findOne(id);
 	}
 
-	public boolean checkUsernameExist(String username) {
-		if (null != findByUsername(username)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean checkEmailExist(String email) {
-		if (null != findByEmail(email)) {
-			return true;
-		}
-
-		return false;
-	}
-
+	@Override
 	public boolean checkUserExist(String username, String email) {
-		if (checkUsernameExist(username) || checkEmailExist(username)) {
-			return true;
-		} else {
-			return false;
-		}
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public void saveConfirmCustomer(Customer customer) {
-		customerRepo.save(customer);
+	public boolean checkUsernameExist(String username) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public List<Customer> allCustomers() {
-		return customerRepo.findAll();
+	public boolean checkEmailExist(String email) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public Customer getOne(Long id) {
-		return customerRepo.findOne(id);
+	public void saveConfirmSystemUser(SystemUser systemUser) {
+		SystemUserRepo.save(systemUser);
+	}
+
+	@Override
+	public SystemUser getOne(Long id) {
+		return SystemUserRepo.findOne(id);
 	}
 
 	@Override
 	public void delete(long id) {
-		customerRepo.delete(id);
+		SystemUserRepo.delete(id);
 	}
 
 	@Override
 	public long count() {
-		return customerRepo.count();
+		return SystemUserRepo.count();
 	}
-
-
+	
 
 }
-*/

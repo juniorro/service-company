@@ -1,4 +1,4 @@
-/*package com.juniorro.servicecompany.model;
+package com.juniorro.servicecompany.model;
 
 import java.util.Date;
 
@@ -20,50 +20,45 @@ public class Services {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
-	@NotEmpty(message = "Name is required")
+	@NotNull(message="Name is required")
 	private String name;
 
-	@NotEmpty(message = "Name is required")
 	private String description;
 
 	private String status;
 
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date requestDate = new Date();
+	@Temporal(TemporalType.DATE)
+	private Date requestDate;
 
-	@DateTimeFormat(pattern = "MM/dd/yyyy h:m a")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull(message = "Requested date is required")
 	private Date serviceDate;
 
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "sustemUser_id")
-	private SystemUser sustemUser;
+	private SystemUser systemUser;*/
 
 	public Services() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Services(String name, String description, String status, Date requestDate, Date serviceDate,
-			SystemUser sustemUser) {
+	public Services(String name, String description, String status, Date requestDate, Date serviceDate) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.status = status;
 		this.requestDate = requestDate;
 		this.serviceDate = serviceDate;
-		this.sustemUser = sustemUser;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -107,13 +102,6 @@ public class Services {
 		this.serviceDate = serviceDate;
 	}
 
-	public SystemUser getSustemUser() {
-		return sustemUser;
-	}
-
-	public void setSustemUser(SystemUser sustemUser) {
-		this.sustemUser = sustemUser;
-	}
-
+	
+	
 }
-*/

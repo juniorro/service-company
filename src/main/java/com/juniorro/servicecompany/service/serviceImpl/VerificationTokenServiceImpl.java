@@ -1,13 +1,9 @@
-/*package com.juniorro.patientappointmentsystem.Service.ServiceImpl;
+/*package com.juniorro.servicecompany.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.juniorro.patientappointmentsystem.Service.VerificationTokenService;
-import com.juniorro.patientappointmentsystem.model.Customer;
-import com.juniorro.patientappointmentsystem.model.security.VerificationToken;
-import com.juniorro.patientappointmentsystem.repo.VerificationTokenRepo;
+import com.juniorro.servicecompany.service.VerificationTokenService;
 
 @Service
 @Transactional
