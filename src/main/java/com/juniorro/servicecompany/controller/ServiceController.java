@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.juniorro.servicecompany.model.Services;
+import com.juniorro.servicecompany.model.SystemUser;
+import com.juniorro.servicecompany.newservicelistener.OnNewServiceRequest;
 import com.juniorro.servicecompany.service.ServicesService;
 import com.juniorro.servicecompany.service.SystemUserService;
 
@@ -27,6 +30,9 @@ public class ServiceController {
 	
 	@Autowired
 	ServicesService servicesService;
+	
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 
 	@RequestMapping(value = "/saveService", method = RequestMethod.POST) 
 	public ModelAndView saveService(@Valid Services service, BindingResult result, Model model, RedirectAttributes redirect) {
@@ -52,8 +58,12 @@ public class ServiceController {
 		service.setStatus("completed");			
 		service.setDescription("Sweeping, Mopping Floor.");
 		servicesService.saveService(service);
+		SystemUser systemUser = service.getSystemUser();
+		System.out.println("============PRINTING RETRIEVED USER=======");
+		System.out.println(systemUser);
 		List <Services> allServices = servicesService.allServices();
 		model.addAttribute("allServices", allServices);
+		eventPublisher.publishEvent(new OnNewServiceRequest(systemUser, service));
 		redirect.addFlashAttribute("newService", true);
 		return new ModelAndView("redirect:/", "service", new Services());
 	}

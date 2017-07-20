@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.juniorro.servicecompany.model.SystemUser;
+import com.juniorro.servicecompany.model.security.UserRole;
 import com.juniorro.servicecompany.repo.SystemUserRepo;
+import com.juniorro.servicecompany.service.RoleService;
 import com.juniorro.servicecompany.service.SystemUserService;
 
 @Service
@@ -17,6 +20,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 
 	@Autowired
 	SystemUserRepo SystemUserRepo;
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public List<SystemUser> allsystemUser() {
@@ -39,29 +48,6 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	@Override
-	public boolean checkUserExist(String username, String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean checkUsernameExist(String username) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean checkEmailExist(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void saveConfirmSystemUser(SystemUser systemUser) {
-		SystemUserRepo.save(systemUser);
-	}
-
-	@Override
 	public SystemUser getOne(Long id) {
 		return SystemUserRepo.findOne(id);
 	}
@@ -75,6 +61,17 @@ public class SystemUserServiceImpl implements SystemUserService {
 	public long count() {
 		return SystemUserRepo.count();
 	}
-	
+
+	@Override
+	public SystemUser saveUser(final SystemUser systemUser, Set<UserRole> userRoles) {
+		for (UserRole roles : userRoles) {
+			roleService.save(roles.getRole());
+		}
+		String encryptpassword = bCryptPasswordEncoder.encode(systemUser.getPassword());
+		systemUser.setPassword(encryptpassword);
+		systemUser.getSystemUserRoles().addAll(userRoles);
+		SystemUserRepo.save(systemUser);
+		return systemUser;
+	}
 
 }

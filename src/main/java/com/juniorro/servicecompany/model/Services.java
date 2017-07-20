@@ -22,7 +22,7 @@ public class Services {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@NotNull(message="Name is required")
+	@NotNull(message = "Name is required")
 	private String name;
 
 	private String description;
@@ -33,25 +33,27 @@ public class Services {
 	@Temporal(TemporalType.DATE)
 	private Date requestDate;
 
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy h:m a")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceDate;
 
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "sustemUser_id")
-	private SystemUser systemUser;*/
+	private SystemUser systemUser;
 
 	public Services() {
 		super();
 	}
 
-	public Services(String name, String description, String status, Date requestDate, Date serviceDate) {
+	public Services(String name, String description, String status, Date requestDate, Date serviceDate,
+			SystemUser systemUser) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.status = status;
 		this.requestDate = requestDate;
 		this.serviceDate = serviceDate;
+		this.systemUser = systemUser;
 	}
 
 	public Long getId() {
@@ -102,6 +104,12 @@ public class Services {
 		this.serviceDate = serviceDate;
 	}
 
-	
-	
+	public SystemUser getSystemUser() {
+		return systemUser;
+	}
+
+	public void setSystemUser(SystemUser systemUser) {
+		this.systemUser = systemUser;
+	}
+
 }

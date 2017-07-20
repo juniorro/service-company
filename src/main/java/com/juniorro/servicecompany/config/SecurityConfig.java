@@ -1,4 +1,4 @@
-/*package com.juniorro.servicecompany.config;
+package com.juniorro.servicecompany.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
@@ -53,4 +53,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 }
-*/
