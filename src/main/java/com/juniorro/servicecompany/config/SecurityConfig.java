@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(PUBLIC_ANT_MATCHERS).permitAll().anyRequest().authenticated().and()
 				.exceptionHandling().accessDeniedPage("/accessDenied");
 
-		http.csrf().disable().cors().disable().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/welcome")
+		http.csrf().disable().cors().disable().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/")
 				.loginProcessingUrl("/processLogin").failureUrl("/login?error");
 
 		http.sessionManagement().maximumSessions(5).maxSessionsPreventsLogin(false).expiredUrl("/login")

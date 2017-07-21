@@ -44,20 +44,15 @@ public class SystemUser implements Serializable, UserDetails {
 	@NotEmpty(message = "Last Name is required")
 	private String lastName;
 
-	@Email(message = "Not a good email")
 	@NotEmpty(message = "Email is required")
 	private String email;
 
-	@NotEmpty(message = "Email is required")
 	private String phone;
 
-	@NotEmpty(message = "Email is required")
 	private String streetAddress;
 
-	@NotEmpty(message = "Email is required")
 	private String city;
 
-	@NotEmpty(message = "Email is required")
 	private String zipCode;
 
 	private String gender;
@@ -67,7 +62,7 @@ public class SystemUser implements Serializable, UserDetails {
 	@Transient
 	private MultipartFile profilePhoto;
 
-	@OneToMany(mappedBy = "systemUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "systemUser",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Services> services;
 
@@ -240,5 +235,16 @@ public class SystemUser implements Serializable, UserDetails {
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "SystemUser [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", streetAddress="
+				+ streetAddress + ", city=" + city + ", zipCode=" + zipCode + ", gender=" + gender + ", enabled="
+				+ enabled + ", profilePhoto=" + profilePhoto + ", services=" + services + ", systemUserRoles="
+				+ systemUserRoles + "]";
+	}
+	
+	
 
 }

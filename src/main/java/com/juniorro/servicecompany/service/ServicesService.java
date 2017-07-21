@@ -13,9 +13,9 @@ public interface ServicesService {
 	
 	Services saveService(Services service);
 
-	void delete(Long id);
-
 	Services getOne(Long id);
+
+	void delete(Services service);
 	
 	
 

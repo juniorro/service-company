@@ -29,8 +29,8 @@ public class ServicesServiceImpl implements ServicesService {
 	}
 
 	@Override
-	public void delete(Long id) {
-		servicesRepo.delete(id);
+	public void delete(Services service) {
+		servicesRepo.delete(service);
 	}
 
 	@Override

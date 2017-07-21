@@ -1,5 +1,6 @@
 package com.juniorro.servicecompany.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,15 +40,16 @@ public class HomeController {
 	ServicesService servicesService;
 
 	@RequestMapping(value = { "/index", "/"})
-	public ModelAndView index(Model model) {
-		List <Services> allServices = servicesService.allServices();
+	public ModelAndView index(Model model, Principal principal) {
+		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
+		List <Services> allServices = systemUser.getServices();
 		model.addAttribute("allServices", allServices);
 		return new ModelAndView("home", "service", new Services());
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
-		model.addAttribute("SystemUser", new SystemUser());
+		model.addAttribute("systemUser", new SystemUser());
 		return "register";
 	}
 
@@ -62,16 +64,16 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@Valid SystemUser customer, BindingResult result, Model model,
+	public String doRegister(@Valid SystemUser systemUser, BindingResult result, Model model,
 			final HttpServletRequest request, final RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			return "register";
+			return "/register";
 		}
 		else {
 			Set<UserRole> userRoles = new HashSet<>();
-			userRoles.add(new UserRole(customer, roleService.findByName("ROLE_ADMIN")));
-			customer.setEnabled(true);
-			final SystemUser newcustomer = systemUserService.saveUser(customer, userRoles);
+			userRoles.add(new UserRole(systemUser, roleService.findByName("ROLE_ADMIN")));
+			systemUser.setEnabled(true);
+			final SystemUser newcustomer = systemUserService.saveUser(systemUser, userRoles);
 			//final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
 					//+ request.getContextPath();
 			//eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newcustomer, appUrl));
