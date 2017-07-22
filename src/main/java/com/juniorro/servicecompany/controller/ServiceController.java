@@ -43,6 +43,12 @@ public class ServiceController {
 			model.addAttribute("allServices", allServices);
 			redirect.addFlashAttribute("noDate", true);
 			return new ModelAndView("redirect:/", "service", new Services());			
+		}		
+		if(service.getServiceDate().before(new Date())){
+			List <Services> allServices = servicesService.allServices();
+			model.addAttribute("allServices", allServices);
+			redirect.addFlashAttribute("greaterDate", true);
+			return new ModelAndView("redirect:/", "service", new Services());			
 		}
 		if(service.getName() == null){
 			List <Services> allServices = servicesService.allServices();

@@ -19,6 +19,9 @@
 			<div th:if="${noDate != null}" class="alert alert-danger" role="alert">
 			<strong>Please select a service date.</strong>
 			</div>
+			<div th:if="${greaterDate != null}" class="alert alert-danger" role="alert">
+			<strong>Please select a date after today.</strong>
+			</div>
 			<div th:if="${cannotDelete != null}" class="alert alert-danger" role="alert">
 			<strong>Cannot delete completed services.</strong>
 			</div>
@@ -169,14 +172,14 @@
                     <b><span th:errors="*{name}" class="text-danger"></span></b>
                       <select id="framework" th:field="*{name}" multiple="multiple"
                         class="form-control">
-                        <option value="Codeigniter">Codeigniter</option>
-                        <option value="CakePHP">CakePHP</option>
-                        <option value="Laravel">Laravel</option>
-                        <option value="YII">YII</option>
-                        <option value="Zend">Zend</option>
-                        <option value="Symfony">Symfony</option>
-                        <option value="Phalcon">Phalcon</option>
-                        <option value="Slim">Slim</option>
+                        <option value="House Cleaning">House Cleaning</option>
+                        <option value="Lawn Mowing">Lawn Mowing</option>
+                        <option value="Chimney Sweep">Chimney Sweep</option>
+                        <option value="Fencing">Fencing</option>
+                        <option value="Roof Cleaning">Roof Cleaning</option>
+                        <option value="Moving">Moving</option>
+                        <option value="Leaf Removal">Leaf Removal</option>
+                        <option value="Blind Cleaning">Blind Cleaning</option>
                       </select>
                     </div>
                   </div>
