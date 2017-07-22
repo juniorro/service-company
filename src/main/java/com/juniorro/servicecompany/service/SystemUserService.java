@@ -27,4 +27,6 @@ public interface SystemUserService {
 
 	SystemUser saveUser(SystemUser customer, Set<UserRole> userRoles);
 
+	void saveUpdate(SystemUser systemUser);
+
 }

@@ -74,4 +74,10 @@ public class SystemUserServiceImpl implements SystemUserService {
 		return systemUser;
 	}
 
+	@Override
+	public void saveUpdate(SystemUser systemUser) {
+		SystemUserRepo.save(systemUser);
+		
+	}
+
 }
