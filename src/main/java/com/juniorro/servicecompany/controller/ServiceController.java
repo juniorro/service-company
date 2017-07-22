@@ -72,8 +72,10 @@ public class ServiceController {
 	@RequestMapping(value = "/deleteService", method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam("id") Long id, Principal principal, Model model, RedirectAttributes redirect) {
 		Services service = servicesService.getOne(id);
+		servicesService.delete(service);
 		if(service.getStatus().contains("completed")){
-			List <Services> allServices = servicesService.allServices();
+			SystemUser systemUser = systemUserService.findByUsername(principal.getName());
+			List <Services> allServices = systemUser.getServices();
 			model.addAttribute("allServices", allServices);
 			redirect.addFlashAttribute("cannotDelete", true);
 			return new ModelAndView("redirect:/", "service", new Services());

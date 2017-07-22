@@ -1,6 +1,7 @@
 package com.juniorro.servicecompany.controller;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.juniorro.servicecompany.model.Services;
 import com.juniorro.servicecompany.model.SystemUser;
 import com.juniorro.servicecompany.model.security.UserRole;
@@ -43,6 +45,7 @@ public class HomeController {
 	public ModelAndView index(Model model, Principal principal) {
 		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
 		List <Services> allServices = systemUser.getServices();
+		model.addAttribute("systemUser", systemUser);
 		model.addAttribute("allServices", allServices);
 		return new ModelAndView("home", "service", new Services());
 	}
@@ -53,9 +56,11 @@ public class HomeController {
 		return "register";
 	}
 
-	@RequestMapping(value = "/forgotPassword")
-	public String reset() {
-		return "reset";
+	@RequestMapping(value = "/profile")
+	public String profile(Model model, Principal principal) {
+		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
+		model.addAttribute("systemUser", systemUser);
+		return "profile";
 	}
 
 	@RequestMapping(value = "/login")
@@ -73,6 +78,7 @@ public class HomeController {
 			Set<UserRole> userRoles = new HashSet<>();
 			userRoles.add(new UserRole(systemUser, roleService.findByName("ROLE_ADMIN")));
 			systemUser.setEnabled(true);
+			systemUser.setJoinDate(new Date());
 			final SystemUser newcustomer = systemUserService.saveUser(systemUser, userRoles);
 			//final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort()
 					//+ request.getContextPath();
@@ -84,11 +90,16 @@ public class HomeController {
 
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+		/*SystemUser systemUser = systemUserService.findByUsername(principal.getName());*/
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		SystemUser systemUser = systemUserService.findByUsername(auth.getPrincipal().getClass().getName());
+		System.out.println(systemUser);
+		systemUser.setLastSignIn(new Date());	
 		if (auth != null) {
+			
 			new SecurityContextLogoutHandler().logout(request, response, auth);
-		}
+		}		
 		return "redirect:/login?logout";
 	}
 

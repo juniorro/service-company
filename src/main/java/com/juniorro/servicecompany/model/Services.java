@@ -3,6 +3,7 @@ package com.juniorro.servicecompany.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,7 +37,7 @@ public class Services {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date serviceDate;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = SystemUser.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "sustemUser_id")
 	private SystemUser systemUser;
 

@@ -2,6 +2,7 @@ package com.juniorro.servicecompany.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,10 +14,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,10 +63,18 @@ public class SystemUser implements Serializable, UserDetails {
 
 	private boolean enabled;
 
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date joinDate;
+
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date lastSignIn;
+
 	@Transient
 	private MultipartFile profilePhoto;
 
-	@OneToMany(mappedBy = "systemUser",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "systemUser", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Services> services;
 
@@ -75,8 +87,8 @@ public class SystemUser implements Serializable, UserDetails {
 	}
 
 	public SystemUser(String username, String password, String firstName, String lastName, String email, String phone,
-			String streetAddress, String city, String zipCode, String gender, boolean enabled,
-			MultipartFile profilePhoto, List<Services> services, Set<UserRole> systemUserRoles) {
+			String streetAddress, String city, String zipCode, String gender, boolean enabled, Date joinDate,
+			Date lastSignIn, MultipartFile profilePhoto, List<Services> services, Set<UserRole> systemUserRoles) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -89,6 +101,8 @@ public class SystemUser implements Serializable, UserDetails {
 		this.zipCode = zipCode;
 		this.gender = gender;
 		this.enabled = enabled;
+		this.joinDate = joinDate;
+		this.lastSignIn = lastSignIn;
 		this.profilePhoto = profilePhoto;
 		this.services = services;
 		this.systemUserRoles = systemUserRoles;
@@ -190,6 +204,22 @@ public class SystemUser implements Serializable, UserDetails {
 		this.enabled = enabled;
 	}
 
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public Date getLastSignIn() {
+		return lastSignIn;
+	}
+
+	public void setLastSignIn(Date lastSignIn) {
+		this.lastSignIn = lastSignIn;
+	}
+
 	public MultipartFile getProfilePhoto() {
 		return profilePhoto;
 	}
@@ -244,7 +274,5 @@ public class SystemUser implements Serializable, UserDetails {
 				+ enabled + ", profilePhoto=" + profilePhoto + ", services=" + services + ", systemUserRoles="
 				+ systemUserRoles + "]";
 	}
-	
-	
 
 }
