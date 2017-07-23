@@ -14,12 +14,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,6 +35,9 @@ import com.juniorro.servicecompany.service.SystemUserService;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
 	SystemUserService systemUserService;
@@ -92,7 +98,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, Principal principal) {
-		/*SystemUser systemUser = systemUserService.findByUsername(principal.getName());*/
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		SystemUser systemUser = systemUserService.findByUsername(auth.getPrincipal().getClass().getName());
 		System.out.println(systemUser);
@@ -124,6 +129,29 @@ public class UserController {
 			redirect.addFlashAttribute("updatedUser", true);
 			return new ModelAndView("redirect:/profile");
 		}
+	}
+	
+	@RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+	public ModelAndView savePassword(@RequestParam("newPassword") final String password,
+			@RequestParam("confirmPassword") final String passwordConfirmation,
+			final RedirectAttributes redirect, final Principal principal, Model model) {
+		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
+		if (password.equals("") || passwordConfirmation.equals("")) {
+			model.addAttribute("systemUser", systemUser);
+			redirect.addFlashAttribute("errorpass", true);
+			return new ModelAndView("redirect:/profile");
+		}
+		if (!password.equals(passwordConfirmation)) {
+			redirect.addFlashAttribute("errorpassword", true);
+			model.addAttribute("systemUser", systemUser);
+			return new ModelAndView("redirect:/profile");
+		}
+		String encryptpassword = bCryptPasswordEncoder.encode(password);
+		systemUser.setPassword(encryptpassword);
+		systemUserService.saveUpdate(systemUser);
+		model.addAttribute("systemUser", systemUser);
+		redirect.addFlashAttribute("resetMessage", true);
+		return new ModelAndView("redirect:/profile");
 	}
 
 }
