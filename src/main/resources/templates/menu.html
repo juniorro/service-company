@@ -60,7 +60,8 @@
                     <div class="row">
                       <div class="col-lg-4">
                         <p class="text-center"> <!-- profile picture location -->
-                          <span class="glyphicon glyphicon-user icon-size"></span>
+                        <img th:src="@{/assets/img/user/}+${systemUser.id}+'.png'" alt="user Photo" height="100" width="100" class="glyphicon glyphicon-user icon-size"/>
+                          <!-- <span class="glyphicon glyphicon-user icon-size"></span> -->
                         </p>
                       </div>
                       <div class="col-lg-8">

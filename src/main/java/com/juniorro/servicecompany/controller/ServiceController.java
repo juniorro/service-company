@@ -3,9 +3,7 @@ package com.juniorro.servicecompany.controller;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.juniorro.servicecompany.model.Services;
 import com.juniorro.servicecompany.model.SystemUser;
 import com.juniorro.servicecompany.newservicelistener.OnNewServiceRequest;
@@ -78,7 +75,6 @@ public class ServiceController {
 	@RequestMapping(value = "/deleteService", method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam("id") Long id, Principal principal, Model model, RedirectAttributes redirect) {
 		Services service = servicesService.getOne(id);
-		servicesService.delete(service);
 		if(service.getStatus().contains("completed")){
 			SystemUser systemUser = systemUserService.findByUsername(principal.getName());
 			List <Services> allServices = systemUser.getServices();
@@ -93,6 +89,15 @@ public class ServiceController {
 		redirect.addFlashAttribute("serviceDeleted", true);
         return new ModelAndView("redirect:/");
     }
+	
+	
+	@RequestMapping(value = "/serviceInfo", method = RequestMethod.GET)
+	public ModelAndView serviceInfo(@RequestParam("id") Long id, Model model, Principal principal) {
+		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
+		model.addAttribute("systemUser", systemUser);
+		Services service = servicesService.getOne(id);
+		return new ModelAndView("serviceInfo", "service", service);
+	}
 
 
 }

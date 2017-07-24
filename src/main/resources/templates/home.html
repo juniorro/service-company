@@ -70,7 +70,7 @@
                     <td th:text="${allService.requestDate}"></td>                    
                     <td th:text="${allService.status}"></td>
                     <td id='confirm-dialog'>
-                        <a class="btn btn-default"><span class="glyphicon glyphicon-pencil"
+                        <a th:href="@{/serviceInfo(id=${allService.id})}" class="btn btn-default"><span class="glyphicon glyphicon-search"
                         aria-hidden="true"></span></a>
                         <a onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" th:href="@{/deleteService(id=${allService.id})}" ><span class="glyphicon glyphicon-trash"
                         aria-hidden="true"></span></a>
