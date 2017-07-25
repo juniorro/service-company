@@ -34,8 +34,9 @@
 			<div th:if="${noName != null}" class="alert alert-danger" role="alert">
 			<strong>Please select a service.</strong>
 			</div>
-            <div class="panel panel-default">
+            <div class="panel panel-default col-md-12">
               <div class="panel-body">
+              <h2>Service List</h2><hr />
                 <div class="pull-left">
                   <div class="btn-group">
                     <button data-toggle="modal" data-target=".myModalAdd"
@@ -49,12 +50,11 @@
                   </div>
                 </div>
                 <div class="table-container">
-                  <table id="myTable" class="table table-striped table-bordered table-list">
+                  <table id="myTable" class="table table-striped table-bordered table-hover table-list">
                    <thead>
                   <tr data-status="cancelled pending complete">
                       <th>Service ID</th>
                       <th>Service Name</th>
-                      <th>Service Description</th>
                       <th>Service Date</th>                      
                       <th>Created On</th>
                       <th>Status</th> 
@@ -65,7 +65,6 @@
                 <tr th:each="allService : ${allServices}">
                     <td th:text="${allService.id}"></td>
                     <td th:text="${allService.name}"></td>
-                    <td th:text="${allService.description}"></td>
                     <td th:text="${allService.serviceDate}"></td>
                     <td th:text="${allService.requestDate}"></td>                    
                     <td th:text="${allService.status}"></td>
