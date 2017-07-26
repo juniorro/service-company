@@ -78,6 +78,11 @@ public class UserController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(@Valid SystemUser systemUser, BindingResult result, Model model,
 			final HttpServletRequest request, final RedirectAttributes redirect) {
+		if (systemUserService.checkUsernameExist(systemUser.getUsername())) {
+			model.addAttribute("usernameExist", true);
+			return "/register";
+		}
+
 		if (result.hasErrors()) {
 			return "/register";
 		}

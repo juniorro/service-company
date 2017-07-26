@@ -90,6 +90,10 @@ input::-webkit-input-placeholder {
 	               	</div>
 	            </div> 
 				<div class="main-login main-center">
+				<div th:if="${usernameExist != null}" class="alert alert-danger"
+						role="alert">
+						<strong>Username already exists. Please choose a different username.</strong>
+					</div>
 					<form class="form-horizontal" method="post" th:action="@{/register}" th:object="${systemUser}">
 						
 						<div class="form-group">

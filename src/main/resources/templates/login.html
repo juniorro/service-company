@@ -75,9 +75,7 @@ input, input::-webkit-input-placeholder {
 				</div>
 			</div>
 			<div class="main-login main-center">
-				<form class="form-horizontal" th:action="@{/processLogin}"
-					method="post">
-					<div th:if="${param.logout != null}" class="alert alert-success"
+			<div th:if="${param.logout != null}" class="alert alert-success"
 						role="alert">
 						<strong>You've been successfully logged out.</strong>
 					</div>
@@ -89,7 +87,8 @@ input, input::-webkit-input-placeholder {
 						role="alert">
 						<strong>Account created successfully. Please log in.</strong>
 					</div>
-
+				<form class="form-horizontal" th:action="@{/processLogin}"
+					method="post">
 					<div class="form-group">
 						<label for="username" class="cols-sm-2 control-label">Username</label>
 						<div class="cols-sm-10">

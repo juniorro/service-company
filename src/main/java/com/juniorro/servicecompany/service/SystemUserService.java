@@ -29,4 +29,6 @@ public interface SystemUserService {
 
 	void saveUpdate(SystemUser systemUser);
 
+	boolean checkUsernameExist(String username);
+
 }

@@ -79,5 +79,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 		SystemUserRepo.save(systemUser);
 		
 	}
+	
+	public boolean checkUsernameExist(String username) {
+		if (null != findByUsername(username)) {
+			return true;
+		}
+		return false;
+	}
 
 }
