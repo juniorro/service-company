@@ -34,7 +34,7 @@ public class ServiceController {
 	private ApplicationEventPublisher eventPublisher;
 
 	@RequestMapping(value = "/saveService", method = RequestMethod.POST) 
-	public ModelAndView saveService(@Valid Services service, Principal principal, Authentication authentication,  BindingResult result, Model model, RedirectAttributes redirect) {
+	public ModelAndView saveService(@Valid Services service, BindingResult result, Principal principal, Authentication authentication, Model model, RedirectAttributes redirect) {
 		if(service.getServiceDate() == null){
 			redirect.addFlashAttribute("noDate", true);
 			return new ModelAndView("redirect:/", "service", new Services());			
@@ -51,6 +51,7 @@ public class ServiceController {
 			redirect.addFlashAttribute("error", true);
 			return new ModelAndView("redirect:/", "service", new Services());
 		}
+		
 		SystemUser systemUser = systemUserService.findByUsername(principal.getName());
 		service.setSystemUser(systemUser);
 		service.setRequestDate(new Date());
